@@ -9,7 +9,7 @@
     // preloadData -> load the data from load functions for given routes 
     import { env } from '$env/dynamic/public'
     import { PUBLIC_LUT_PUB_KEY } from '$env/static/public';
-    console.log('PUBLIC_LUT_PUB_KEY', PUBLIC_LUT_PUB_KEY);
+    // console.log('PUBLIC_LUT_PUB_KEY', PUBLIC_LUT_PUB_KEY);
 
 
     import { browser, building, dev, version } from '$app/environment'
@@ -21,7 +21,7 @@
 
     export let data;
     $: ({ all_episodes } = data);
-    console.log(browser, building, dev, version)
+    // console.log(browser, building, dev, version)
     // browser -> boolean, if browser is running
     // building -P boolean, true, if currently building for production
     // dev -> boolean, true, if in development mode
@@ -30,21 +30,21 @@
 
 <Header />
 
-{#if !!$navigating}
+<!-- {#if !!$navigating}
     <div class="loading">Loading</div>
-{/if}
+{/if} -->
 
 <main>
-    <div class="main">
-        <button on:click={() => goto('/contact')}>Change Page</button>
+    <div class="main verticle_scroll">
+        <!-- <button on:click={() => goto('/contact')}>Change Page</button> -->
         <slot />
+        <Footer />
     </div>
-    <aside>
+    <aside class="vertical_scroll">
         <Episodes episodes={all_episodes} />
     </aside>
 </main>
 
-<Footer />
 
 <!-- The lang can be set to any preprocessed css language
      because we have added svelte preprocessing to the page
@@ -54,13 +54,18 @@
     main {
         display: grid;
         grid-template-columns: 300px 1fr;
+        gap: 20px;
+        height: calc(100vh - var(--header_height))
     }
 
     aside {
         order: -1;
     }
 
-    .loading {
+    .vertical_scroll {
+        overflow: scroll;
+    }
+    /* .loading {
         position: fixed;
         inset: 0;
         display: flex;
@@ -68,5 +73,5 @@
         align-items: center;
         background-color: blue;
         color: white;
-    }
+    } */
 </style>
