@@ -8,9 +8,13 @@
 
     // $: console.log($navigating, $page)
     $: ({ latest_episode } = data)
+
+    function on_play(event: CustomEvent<{ player_status: 'PLAY' | 'STOP' }>) {
+        console.log('event', event);
+    }
 </script>
 
 <h2>Latest Episodes</h2>
 <h3>{latest_episode.title}</h3>
 
-<Test name={name}/>
+<Test name={name} on:play={on_play}/>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher<{ play: { player_status: 'PLAY' | 'STOP' }}>();
   // This is a reqired prop now
   export let name: string;
   // Optional props need a default value
@@ -24,8 +26,11 @@
 <h1>Test {name}</h1>
 
 <button on:click={on_click}>Click Me</button>
+<button on:click={() => dispatch('play', {
+  player_status: 'PLAY'
+})}>Dispatch Me</button>
 
-<input type="text" on:input={() => on_input} />
+<input type="text" on:input={on_input} />
 
 {#if expanded}
   <div>Is Expanded</div>
