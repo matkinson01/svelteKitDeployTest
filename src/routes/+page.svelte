@@ -2,6 +2,7 @@
     import { navigating, page, updated, getStores} from '$app/stores'
     import { writable } from 'svelte/store';
     import Test from '$lib/Test.svelte';
+    import { search } from '$lib/state'
     import '$db/start.js';
     export let data;
 
@@ -15,7 +16,7 @@
     $: ({ latest_episode } = data)
 
     function on_play(event: CustomEvent<{ player_status: 'PLAY' | 'STOP' }>) {
-        console.log('event', event.detail.player_status);
+        search.toggle_status();
     }
 </script>
 
@@ -27,3 +28,6 @@
 {#if $is_nav_open}
     <div><h3>Im open</h3></div>
 {/if}
+
+{$search.status}
+{$search.text}
