@@ -4,7 +4,7 @@ import { LUT_API } from '$env/static/private';
 console.log('LUT_API', LUT_API)
 
 export async function load({ fetch, params, setHeaders, locals }) {
-  console.log(locals.user);
+  // console.log(locals.user);
   if(!locals?.user?.id) throw redirect(307, '/');
 
   const res = await fetch(`http://syntax.fm/api/shows/${params.num}`);
