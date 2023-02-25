@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, getContext } from "svelte";
 	import type { Writable } from "svelte/store";
+	import type { CurrentPositionContext } from "./types";
   const dispatch = createEventDispatcher<{ play: { player_status: 'PLAY' | 'STOP' }}>();
   // This is a reqired prop now
   export let name: string;
@@ -9,6 +10,8 @@
   export let list: string[] = [];
 
   export let is_nav_open: Writable<boolean>;
+
+  const { value, text } = getContext<CurrentPositionContext>('current_position') 
 
   // FIRST SOLUTION
   // function on_click(event: Event) {
@@ -42,3 +45,8 @@
 {#each list as item}
   <p>{item}</p>
 {/each}
+
+<h4>
+  {value}
+  {$text}
+</h4>
