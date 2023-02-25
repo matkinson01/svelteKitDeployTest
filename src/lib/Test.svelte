@@ -1,11 +1,14 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+	import type { Writable } from "svelte/store";
   const dispatch = createEventDispatcher<{ play: { player_status: 'PLAY' | 'STOP' }}>();
   // This is a reqired prop now
   export let name: string;
   // Optional props need a default value
   export let expanded: boolean = false;
   export let list: string[] = [];
+
+  export let is_nav_open: Writable<boolean>;
 
   // FIRST SOLUTION
   // function on_click(event: Event) {
